@@ -29,7 +29,7 @@ search.current.value=''
    <div className="form-container">
     <form onSubmit={submitHandler}>
       <input type="text" ref={search} placeholder=" search" />
-      <button className="form-btn">search</button>
+      <button className="form-btn"><h1>search</h1></button>
     </form></div>
   );
 };
