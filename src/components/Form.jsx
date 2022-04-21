@@ -16,7 +16,8 @@ const Form = () => {
     data.results &&
       searchInput &&
       navigator("/search-results", { state: data });
-  }, [data]);
+  }, [data]);//eslint-disable-line react-hooks/exhaustive-deps
+
 
   const submitHandler = (e) => {
     e.preventDefault();
