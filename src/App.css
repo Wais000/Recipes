@@ -478,12 +478,12 @@ select {
   .instruction,
   .ingredient-list {
     width: 100%;
-    padding: 5px;
+    padding: 15px;
     margin: 5px;
   }
   .ingredient-list{
     margin-bottom: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
   }
 
 }
