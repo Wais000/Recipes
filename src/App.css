@@ -475,15 +475,15 @@ select {
     bottom: 10px;
   }
   .img-container,
+  .instruction,
   .ingredient-list {
     width: 100%;
     padding: 5px;
     margin: 5px;
   }
-  .instruction {
-    width: 100%;
-    padding: 5px;
-    margin: 5px;
-    border: 2px solid red;
+  .ingredient-list{
+    margin-bottom: 20px;
+    padding-bottom: 20px;
   }
+
 }
