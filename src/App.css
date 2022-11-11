@@ -485,5 +485,7 @@ select {
     margin-bottom: 3%;
     padding-bottom: 25px;
   }
-
+  .img-container{
+    margin-top: 3%;
+  }
 }
