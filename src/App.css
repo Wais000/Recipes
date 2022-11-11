@@ -321,7 +321,7 @@ select {
   line-height: 140%;
 }
 
-.ingredient-card .instruction {
+.instruction {
   padding: 5%;
   width: 35%;
   line-height: 140%;
@@ -440,26 +440,33 @@ select {
     margin: 0;
     flex-wrap: wrap;
   }
-  .img-container {
-    width: 40%;
+  .instruction,
+  .img-container,
+  .ingredient-list {
+    width: 85%;
     padding: 5px;
     margin: 5px;
-    padding: 20px 2px 2px 2px;
+    padding: 20px 10px 10px 20px;
+    border: none;
   }
-  .instruction {
-    width: 500px;
-    padding: 0;
-    margin: 0;
-    border: 2px solid red;
+  .ingredient-list{
+    margin-bottom: 5%;
+    padding-bottom: 20px;
   }
-  /* .instruction
-  .ingredient-list */
+  .logo {
+    height: 170px;
+    width: 170px;
+}
 }
 
 @media only screen and (max-width: 600px) {
   .form-container {
     width: 80%;
   }
+  .logo {
+    height: 130px;
+    width: 130px;
+}
   .nav {
     width: 40px;
     height: 40px;
