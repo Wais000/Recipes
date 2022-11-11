@@ -27,11 +27,11 @@ search.current.value=''
 
   console.log(searchInput);
   return (
-   <div className="form-container">
-    <form onSubmit={submitHandler}>
-      <input type="text" ref={search} placeholder=" search" />
-      <button className="form-btn"><h1>search</h1></button>
-    </form></div>
+   
+    <form onSubmit={submitHandler} className="form-container">
+      <input type="text" ref={search} placeholder="search" />
+      <button className="form-btn">search</button>
+    </form>
   );
 };
 
