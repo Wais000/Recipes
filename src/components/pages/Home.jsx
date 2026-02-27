@@ -24,7 +24,7 @@ const Home = () => {
       </div>
 
       {/* Responsive grid: 2 columns on mobile, up to 5 on large screens */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8 justify-items-center">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-[448px]:gap-3 md:gap-4 justify-items-center">
         {categories.map((category) => (
           <Card
             key={category.idCategory}
