@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.banner {
+  width: 100%;
+  height: 100%;
+  background-image: url(/src/pictures/banner12.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: 10s;
+  animation-name: animate;
+  animation-direction: alternate-reverse;
+  animation-duration: 40s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  animation-timing-function: ease-in;
+  position: relative;
+}
+
+@keyframes animate {
+  0% { background-image: url(/src/pictures/banner1.jpg); }
+  10% { background-image: url(/src/pictures/banner2.jpg); }
+  20% { background-image: url(/src/pictures/banner3.jpg); }
+  30% { background-image: url(/src/pictures/banner4.jpg); }
+  40% { background-image: url(/src/pictures/banner5.jpg); }
+  50% { background-image: url(/src/pictures/banner6.jpg); }
+  60% { background-image: url(/src/pictures/banner7.jpg); }
+  70% { background-image: url(/src/pictures/banner8.jpg); }
+  80% { background-image: url(/src/pictures/banner9.jpg); }
+  90% { background-image: url(/src/pictures/banner10.jpg); }
+  100% { background-image: url(/src/pictures/banner11.jpg); }
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
+}
+
+.background-color {
+  background-color: #fc910e;
+}

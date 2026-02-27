@@ -1,44 +1,25 @@
-import React from "react";
-import useFetch from "../../useFetch/useFetch";
-import { Link } from "react-router-dom";
+// src/components/pages/Home.jsx
+import React from 'react';
+import useFetch from '../../hooks/useFetch';
+import { API_BASE } from '../../utils/constants';
+import Card from '../common/Card';
 
 const Home = () => {
-  const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
+  const { results, loading, error } = useFetch(`${API_BASE}/categories.php`);
 
-  const data = useFetch(url);
-
-  console.log(data);
+  if (loading) return <p className="text-center text-white">Loading categories...</p>;
+  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div>
-      <div className="categories">
-        {data.results &&
-          data.results.categories.map((cate) => (
-            <div key={cate.id} className={`card_container ${cate.strCategory}`}>
-              <div className="box">
-                {" "}
-                <img
-                  className="img_box"
-                  id={`${cate.strCategory}`}
-                  src={cate.strCategoryThumb}
-                  alt=""
-                />{" "}
-              </div>
-              <div className="content">
-                <h1 key={cate.id}>
-                  {" "}
-                  <option value=""></option>
-                  <Link
-                    className="card_Header"
-                    to={`/home/${cate.strCategory}`}
-                  >
-                    {cate.strCategory}
-                  </Link>{" "}
-                </h1>
-              </div>
-            </div>
-          ))}
-      </div>
+    <div className="flex flex-wrap justify-center gap-4 p-8 bg-white/30 rounded-2xl mb-8">
+      {results?.categories?.map((category) => (
+        <Card
+          key={category.idCategory}
+          to={`/home/${category.strCategory}`}
+          image={category.strCategoryThumb}
+          title={category.strCategory}
+        />
+      ))}
     </div>
   );
 };

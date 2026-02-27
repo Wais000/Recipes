@@ -1,10 +1,8 @@
+// src/index.js
 import React from 'react';
-import ReactDOMClient from 'react-dom/client';
-import Routings from './router/Routings'
-import './App.css'
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import AppRouter from './router/AppRouter';
 
-const root = ReactDOMClient.createRoot(document.querySelector('#root'))
-
-root.render(<Routings />);
-
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<AppRouter />);
