@@ -196,10 +196,10 @@ const Header = () => {
             )}
           </div>
 
-          {/* Right side: Logo */}
+          {/* Right side: Logo – hidden on very small screens to avoid wrapping issues */}
           <Link
             to="/"
-            className="block w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-amber-400/80 shadow-lg overflow-hidden bg-amber-50 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50"
+            className="block w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-amber-400/80 shadow-lg overflow-hidden bg-amber-50 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50 max-[767px]:hidden"
             aria-label="Home"
           >
             <img
@@ -211,9 +211,9 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Hero content – now vertically centered with more space */}
+      {/* Hero content – responsive heading */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 text-center pt-16 md:pt-0">
-        <h1 className="font-serif text-5xl md:text-6xl font-light text-amber-50 mb-3 tracking-wide drop-shadow-lg">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-amber-50 mb-3 tracking-wide drop-shadow-lg">
           Discover Delicious Recipes
         </h1>
         <p className="font-sans text-lg md:text-xl text-amber-100 mb-6 max-w-2xl drop-shadow">
@@ -224,11 +224,11 @@ const Header = () => {
             type="text"
             ref={searchRef}
             placeholder="Search for a recipe..."
-            className="flex-grow px-5 py-3 rounded-l-full border border-amber-300/50 bg-amber-50/90 backdrop-blur-sm text-amber-900 placeholder-amber-500/70 outline-none focus:ring-2 focus:ring-[#fc910e]"
+            className="flex-grow px-5 py-3 rounded-l-full border border-amber-300/50 bg-amber-50/90 backdrop-blur-sm text-amber-900 placeholder-amber-500/70 outline-none focus:ring-1 focus:ring-[#fc910e] focus:ring-inset focus:border-[#fc910e]"
           />
           <button
             type="submit"
-            className="px-6 py-3 font-sans text-xs font-medium uppercase tracking-widest text-amber-900 bg-amber-50/90 border border-amber-300/50 rounded-r-full hover:bg-[#fc910e] hover:text-white hover:border-[#fc910e] transition-all duration-500"
+            className="px-6 py-3 font-sans text-xs font-medium uppercase tracking-widest text-white bg-orange-500 border border-orange-500 rounded-r-full hover:bg-orange-600 hover:border-orange-600 transition-all duration-500"
           >
             Search
           </button>
