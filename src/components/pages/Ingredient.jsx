@@ -35,20 +35,27 @@ const Ingredient = () => {
           <h1 className="absolute bottom-4 left-4 text-3xl md:text-4xl font-serif font-light text-white tracking-wide drop-shadow-lg">
             {meal.strMeal}
           </h1>
-          {meal.strYoutube && (
+        </div>
+
+        {/* YouTube button – now outside the absolute overlay, centered on mobile */}
+        {meal.strYoutube && (
+          <div className="flex justify-end px-6 pt-4">
             <a
               href={meal.strYoutube}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute bottom-4 right-4 px-5 py-2 text-xs font-sans font-medium uppercase tracking-widest text-white border border-white/50 rounded-none hover:bg-[#fc910e] hover:text-white hover:border-[#fc910e] transition-all duration-500"
+              className="inline-flex items-center gap-2 px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-sans text-sm font-medium uppercase tracking-wider rounded-full shadow-md transition-all duration-300"
             >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
               Watch on YouTube
             </a>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Tabs */}
-        <div className="flex border-b border-amber-200/50">
+        <div className="flex border-b border-amber-200/50 mt-2">
           <button
             onClick={() => setActiveTab('instructions')}
             className={`flex-1 py-3 text-center font-serif text-lg font-light tracking-wide transition-colors duration-300 ${
