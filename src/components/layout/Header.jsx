@@ -90,7 +90,7 @@ const Header = () => {
   const goForward = useCallback(() => navigate(1), [navigate]);
 
   return (
-    <header className="relative w-full h-96 mb-8 overflow-hidden rounded-b-3xl shadow-xl">
+    <header className="relative w-full h-96 mb-8 overflow-hidden">
       {/* Banner animation (preserved) */}
       <div className="absolute inset-0 banner" />
 
@@ -99,71 +99,73 @@ const Header = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_rgba(0,0,0,0.3)_80%)] z-10" />
 
       {/* ===== TOP NAVIGATION BAR – 5‑Star Hotel Style ===== */}
-      <div className="absolute top-4 left-4 right-4 z-30 flex items-center justify-between">
-        {/* Left group: Home + Back + Forward + Dropdown */}
-        <div className="flex items-center gap-3 bg-gradient-to-br from-amber-50/95 to-amber-100/95 backdrop-blur-md rounded-full pl-1 pr-3 py-1 shadow-xl border border-amber-300/40 hover:border-amber-300/60 transition-colors duration-300">
-          {/* Home button (replaces logo) */}
+      <div className="absolute top-0 left-0 right-0 z-30">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          {/* Left group: Home + Back + Forward + Dropdown */}
+          <div className="flex items-center gap-3 bg-gradient-to-br from-amber-50/95 to-amber-100/95 backdrop-blur-md rounded-full pl-1 pr-3 py-1 shadow-xl border border-amber-300/40 hover:border-amber-300/60 transition-colors duration-300">
+            {/* Home button */}
+            <Link
+              to="/"
+              className="p-2 text-amber-800 hover:text-amber-950 bg-amber-200/20 rounded-full backdrop-blur-sm hover:bg-amber-300/30 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
+              aria-label="Home"
+            >
+              <FontAwesomeIcon icon={faHome} className="text-lg md:text-xl" />
+            </Link>
+
+            {/* Back button (only if not home) */}
+            {!isHome && (
+              <button
+                onClick={goBack}
+                className="p-2 text-amber-800 hover:text-amber-950 bg-amber-200/20 rounded-full backdrop-blur-sm hover:bg-amber-300/30 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50"
+                aria-label="Go back"
+              >
+                <FontAwesomeIcon icon={faArrowLeft} className="text-lg md:text-xl" />
+              </button>
+            )}
+
+            {/* Forward button */}
+            <button
+              onClick={goForward}
+              className="p-2 text-amber-800 hover:text-amber-950 bg-amber-200/20 rounded-full backdrop-blur-sm hover:bg-amber-300/30 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50"
+              aria-label="Go forward"
+            >
+              <FontAwesomeIcon icon={faArrowRight} className="text-lg md:text-xl" />
+            </button>
+
+            {/* Dropdown */}
+            {dropdownItems.length > 0 && (
+              <div className="relative">
+                <select
+                  value={selectedItemId}
+                  onChange={handleDropdownChange}
+                  className="appearance-none bg-amber-50/90 backdrop-blur-sm border border-amber-300/40 rounded-full pl-4 pr-8 py-2 text-sm font-sans text-amber-900 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#fc910e] focus:border-transparent transition-all duration-300 w-40 md:w-48 truncate cursor-pointer"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' stroke='%23fc910e'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E")`,
+                    backgroundPosition: 'right 1rem center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: '1.2rem',
+                  }}
+                >
+                  <option value="" className="text-amber-500">Browse</option>
+                  {dropdownItems.map(item => (
+                    <option key={item.id} value={item.id} className="text-amber-900">
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+
+          {/* Right side: Logo */}
           <Link
             to="/"
-            className="p-2 text-amber-800 hover:text-amber-950 bg-amber-200/20 rounded-full backdrop-blur-sm hover:bg-amber-300/30 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center"
+            className="block w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-amber-400/80 shadow-lg overflow-hidden bg-amber-50 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50"
             aria-label="Home"
           >
-            <FontAwesomeIcon icon={faHome} className="text-lg md:text-xl" />
+            <img src={logoImg} alt="Logo" className="w-full h-full object-cover" />
           </Link>
-
-          {/* Back button (only if not home) */}
-          {!isHome && (
-            <button
-              onClick={goBack}
-              className="p-2 text-amber-800 hover:text-amber-950 bg-amber-200/20 rounded-full backdrop-blur-sm hover:bg-amber-300/30 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50"
-              aria-label="Go back"
-            >
-              <FontAwesomeIcon icon={faArrowLeft} className="text-lg md:text-xl" />
-            </button>
-          )}
-
-          {/* Forward button */}
-          <button
-            onClick={goForward}
-            className="p-2 text-amber-800 hover:text-amber-950 bg-amber-200/20 rounded-full backdrop-blur-sm hover:bg-amber-300/30 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50"
-            aria-label="Go forward"
-          >
-            <FontAwesomeIcon icon={faArrowRight} className="text-lg md:text-xl" />
-          </button>
-
-          {/* Dropdown */}
-          {dropdownItems.length > 0 && (
-            <div className="relative">
-              <select
-                value={selectedItemId}
-                onChange={handleDropdownChange}
-                className="appearance-none bg-amber-50/90 backdrop-blur-sm border border-amber-300/40 rounded-full pl-4 pr-8 py-2 text-sm font-sans text-amber-900 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#fc910e] focus:border-transparent transition-all duration-300 w-40 md:w-48 truncate cursor-pointer"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20' stroke='%23fc910e'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E")`,
-                  backgroundPosition: 'right 1rem center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: '1.2rem',
-                }}
-              >
-                <option value="" className="text-amber-500">Browse</option>
-                {dropdownItems.map(item => (
-                  <option key={item.id} value={item.id} className="text-amber-900">
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
         </div>
-
-        {/* Right side: Logo (replaces home button) */}
-        <Link
-          to="/"
-          className="block w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-amber-400/80 shadow-lg overflow-hidden bg-amber-50 hover:scale-105 transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-[#fc910e]/50"
-          aria-label="Home"
-        >
-          <img src={logoImg} alt="Logo" className="w-full h-full object-cover" />
-        </Link>
       </div>
 
       {/* Hero content (centered) */}

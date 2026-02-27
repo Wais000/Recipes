@@ -10,16 +10,29 @@ const Home = () => {
   if (loading) return <p className="text-center text-white">Loading categories...</p>;
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
+  const categories = results?.categories || [];
+
   return (
     <div className="flex flex-wrap justify-center gap-4 p-8 bg-white/30 rounded-2xl mb-8">
-      {results?.categories?.map((category) => (
-        <Card
-          key={category.idCategory}
-          to={`/home/${category.strCategory}`}
-          image={category.strCategoryThumb}
-          title={category.strCategory}
-        />
-      ))}
+      <div className="w-full text-center mb-8">
+        <h2 className="font-serif text-4xl md:text-5xl font-light text-amber-900 mb-2 capitalize tracking-wide">
+          Categories
+        </h2>
+        <p className="font-sans text-amber-700 text-lg">
+          {categories.length} {categories.length === 1 ? 'category' : 'categories'} available
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 justify-items-center">
+        {categories.map((category) => (
+          <Card
+            key={category.idCategory}
+            to={`/home/${category.strCategory}`}
+            image={category.strCategoryThumb}
+            title={category.strCategory}
+          />
+        ))}
+      </div>
     </div>
   );
 };

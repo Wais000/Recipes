@@ -18,9 +18,7 @@ const Sections = () => {
   }
 
   if (error) {
-    return (
-      <p className="text-center text-red-500 py-8">Error: {error}</p>
-    );
+    return <p className="text-center text-red-500 py-8">Error: {error}</p>;
   }
 
   const meals = results?.meals || [];
@@ -34,9 +32,8 @@ const Sections = () => {
   }
 
   return (
-    <section className="flex flex-col items-center justify-center gap-4 p-8 bg-white/30 rounded-2xl mb-8">
-      {/* Header with category name and count */}
-      <div className="text-center mb-12">
+    <div className="flex flex-wrap justify-center gap-4 p-8 bg-white/30 rounded-2xl mb-8">
+      <div className="w-full text-center mb-8">
         <h2 className="font-serif text-4xl md:text-5xl font-light text-amber-900 mb-2 capitalize tracking-wide">
           {strCategory}
         </h2>
@@ -45,8 +42,7 @@ const Sections = () => {
         </p>
       </div>
 
-      {/* Responsive grid – cards breathe freely with gap-8 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-8 justify-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 justify-items-center">
         {meals.map((meal) => (
           <Card
             key={meal.idMeal}
@@ -56,7 +52,7 @@ const Sections = () => {
           />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 
