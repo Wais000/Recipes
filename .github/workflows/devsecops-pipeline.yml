@@ -1,5 +1,4 @@
 name: Build and Security Scan
-
 on:
   push:
     branches: [ main ]
@@ -34,4 +33,4 @@ jobs:
         run: npm install
 
       - name: Run npm audit (production dependencies only)
-        run: npm audit --omit=dev --audit-level=high
+        run: npm audit --omit=dev --audit-level=moderate
