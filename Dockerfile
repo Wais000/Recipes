@@ -7,13 +7,16 @@ RUN npm ci --no-audit --no-fund
 COPY . .
 RUN npm run build
 
-# ---- Stage 2: serve it with unprivileged nginx (runs as non-root) ----
-FROM nginxinc/nginx-unprivileged:stable-alpine
-# Install the latest Alpine security patches for OS packages
-USER root
-RUN apk upgrade --no-cache
-USER 101
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/build /usr/share/nginx/html
+# ---- Stage 2: serve it with nginx from Alpine's own repository ----
+# Alpine's nginx package gets security fixes faster than the nginx.org
+# image's pinned build, which Trivy flagged. Runs as the non-root nginx user.
+FROM alpine:3.24
+RUN apk upgrade --no-cache \
+ && apk add --no-cache nginx \
+ && chown -R nginx:nginx /var/lib/nginx /var/log/nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build --chown=nginx:nginx /app/build /usr/share/nginx/html
+USER nginx
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s CMD wget -qO- http://127.0.0.1:8080/ >/dev/null || exit 1
+CMD ["nginx", "-g", "daemon off;"]
