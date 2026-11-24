@@ -1,0 +1,10 @@
+node_modules
+build
+static
+asset-manifest.json
+/index.html
+.git
+.github
+.vercel
+npm-debug.log*
+.dockerignore
