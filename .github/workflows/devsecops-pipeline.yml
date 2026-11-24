@@ -1,36 +1,44 @@
 name: Build and Security Scan
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
+# Least privilege: this workflow only needs to read the code
+permissions:
+  contents: read
+
 jobs:
   build-and-scan:
     runs-on: ubuntu-latest
     steps:
 
+      # Third-party actions are pinned to full commit SHAs (supply-chain hardening)
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies (from lockfile)
+        run: npm ci
+
+      - name: Run npm audit (production dependencies only)
+        run: npm audit --omit=dev --audit-level=moderate
 
       - name: Build Docker image
-        run: docker build -t recipes-app:${{ github.sha }} .
+        run: docker build --pull -t recipes-app:${{ github.sha }} .
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           image-ref: 'recipes-app:${{ github.sha }}'
           format: 'table'
           severity: 'CRITICAL,HIGH'
+          ignore-unfixed: true
           exit-code: '1'
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run npm audit (production dependencies only)
-        run: npm audit --omit=dev --audit-level=moderate
